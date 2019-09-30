@@ -1,18 +1,25 @@
-const validateFinalTemplate = (callback) => {
-    const { stack } = this.options;
+const AWS = require('aws-sdk');
+
+const validateFinalTemplate = (template, region) => {
+
+  return new Promise((resolve, reject) => {
+
     const cloudformation = new AWS.CloudFormation({
       apiVersion: '2010-05-15',
-      region: stack.region,
+      region: region,
     });
 
-    cloudformation.validateTemplate({ TemplateBody: JSON.stringify(this.output.template, '', 4) }, (err) => {
+    cloudformation.validateTemplate({TemplateBody: JSON.stringify(template, '', 4) }, (err) => {
       if (err) {
-        this.log.error(`├─ ${err.message}`, false);
-        this.log.error(`└─ RequestId: ${err.requestId}`, false);
-        this.log.stop();
+        console.log(`├─ ${err.message}`, false);
+        console.log(`└─ RequestId: ${err.requestId}`, false);
         process.exit(1);
+        reject(err);
       } else {
-        callback();
+        resolve();
       }
     });
-  };
+  });
+};
+
+module.exports = validateFinalTemplate;

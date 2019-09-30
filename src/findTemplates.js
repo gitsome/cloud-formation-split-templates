@@ -7,7 +7,7 @@ const walkTemplates =(dir, list) => {
   fs.readdirSync(dir).forEach((file) => {
     const filename = path.join(dir, file);
     if (fs.statSync(filename).isDirectory()) {
-      newlist = [...newlist, ...this.walkTemplates(filename, list)];
+      newlist = [...newlist, ...walkTemplates(filename, list)];
     } else {
       newlist.push(filename);
     }
@@ -23,14 +23,14 @@ const findTemplates = (templatePath) => {
     : path.resolve(process.cwd(), templatePath);
 
   if (!fs.existsSync(entryPath)) {
-    this.log.error('The entry folder is not found.');
+    console.log('The entry folder is not found.');
   }
 
   const files = walkTemplates(entryPath, []);
   if (files.length > 0) {
-    this.log.info(`├─ Found ${files.length} template(s)...`);
+    console.log(`├─ Found ${files.length} template(s)...`);
   } else {
-    this.log.info('└─ Found no templates in the folder...');
+    console.log('└─ Found no templates in the folder...');
   }
 
   return files;

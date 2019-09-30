@@ -3,7 +3,7 @@ const processTemplates = require('./processTemplates');
 const validateFinalTemplate = require('./validateTemplates');
 const saveTemplate = require('./saveTemplate');
 
-const build = ({templatesPath, outputPath, outputFileName, validate}) => {
+const build = ({templatesPath, outputPath, outputFileName, validate, awsRegion}) => {
 
   return new Promise((resolve, reject) => {
 
@@ -22,14 +22,14 @@ const build = ({templatesPath, outputPath, outputFileName, validate}) => {
     if (validate) {
 
       console.log('├─ Validating final template...');
-      return validateFinalTemplate(combinedTemplate).then(() => {
-        saveTemplate(outputPath, outputFileName);
-        console.log(`└─ Final template: ${this.output.templateFile}\n`);
+      return validateFinalTemplate(combinedTemplate, awsRegion).then(() => {
+        const finalFileName = saveTemplate(combinedTemplate, outputPath, outputFileName);
+        console.log(`└─ Final template: ${finalFileName}\n`);
       }).then(resolve).catch(reject);
 
     } else {
-      saveTemplate(outputPath, outputFileName);
-      console.log(`└─ Final template: ${this.output.templateFile}\n`);
+      const finalFileName = saveTemplate(combinedTemplate, outputPath, outputFileName);
+      console.log(`└─ Final template: ${finalFileName}\n`);
       resolve();
     }
   });
