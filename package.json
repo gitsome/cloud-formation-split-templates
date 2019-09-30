@@ -1,0 +1,30 @@
+{
+  "name": "cloud-formation-split-templates",
+  "version": "1.0.0",
+  "description": "Allows CloudFormation to be split into multiple files",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gitsome/cloud-formation-split-templates.git"
+  },
+  "keywords": [
+    "cloudformation",
+    "multiple",
+    "files"
+  ],
+  "author": "John Martin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gitsome/cloud-formation-split-templates/issues"
+  },
+  "homepage": "https://github.com/gitsome/cloud-formation-split-templates#readme",
+  "dependencies": {
+    "fs-extra": "^8.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^6.5.0"
+  }
+}
