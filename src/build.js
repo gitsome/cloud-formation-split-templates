@@ -23,14 +23,25 @@ const build = ({templatesPath, outputPath, outputFileName, validate, awsRegion})
 
       console.log('├─ Validating final template...');
       return validateFinalTemplate(combinedTemplate, awsRegion).then(() => {
+
         const finalFileName = saveTemplate(combinedTemplate, outputPath, outputFileName);
         console.log(`└─ Final template: ${finalFileName}\n`);
-      }).then(resolve).catch(reject);
+
+        return resolve ({
+          filePath: finalFileName,
+          template: combinedTemplate
+        });
+      }).catch(reject);
 
     } else {
+
       const finalFileName = saveTemplate(combinedTemplate, outputPath, outputFileName);
       console.log(`└─ Final template: ${finalFileName}\n`);
-      resolve();
+
+      return resolve({
+        filePath: finalFileName,
+        template: combinedTemplate
+      });
     }
   });
 };
