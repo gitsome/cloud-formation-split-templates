@@ -1,3 +1,4 @@
+const chalk = require('chalk');
 const yaml = require('js-yaml');
 const fs = require('fs-extra');
 const intrinsicFunctions = require('./intrinsicFunctionsSchema.js');
@@ -27,7 +28,7 @@ const processTemplates = (files) => {
 
       if (!doc) {
         const error = err.toString().split('\n').join('\n│  ');
-        console.log(`├─ Error processing ${file} template: ${error}`);
+        console.log(chalk.red(`├─ Error processing ${file} template: ${error}`));
         return;
       }
 

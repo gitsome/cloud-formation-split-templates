@@ -1,3 +1,4 @@
+const chalk = require('chalk');
 const findTemplates = require('./findTemplates');
 const processTemplates = require('./processTemplates');
 const validateFinalTemplate = require('./validateTemplates');
@@ -7,7 +8,7 @@ const build = ({templatesPath, outputPath, outputFileName, validate, awsRegion})
 
   return new Promise((resolve, reject) => {
 
-    console.log('Build template file...');
+    console.log(chalk.cyan('Build template file...'));
 
     console.log(`├─ Looking for templates in the ${templatesPath} folder...`);
     const files = findTemplates(templatesPath);

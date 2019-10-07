@@ -1,5 +1,6 @@
 const fs = require('fs-extra');
 const path = require('path');
+const chalk = require('chalk');
 
 const walkTemplates =(dir, list) => {
   let newlist = [...list];
@@ -23,7 +24,7 @@ const findTemplates = (templatePath) => {
     : path.resolve(process.cwd(), templatePath);
 
   if (!fs.existsSync(entryPath)) {
-    console.log('The entry folder is not found.');
+    console.log(chalk.red('The entry folder is not found.'));
   }
 
   const files = walkTemplates(entryPath, []);

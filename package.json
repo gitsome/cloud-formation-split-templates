@@ -1,6 +1,6 @@
 {
   "name": "cloud-formation-split-templates",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Allows CloudFormation to be split into multiple files",
   "main": "index.js",
   "scripts": {
@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/gitsome/cloud-formation-split-templates#readme",
   "dependencies": {
+    "chalk": "^2.4.2",
     "fs-extra": "^8.1.0"
   },
   "devDependencies": {
