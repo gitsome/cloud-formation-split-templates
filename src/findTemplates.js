@@ -2,6 +2,12 @@ const fs = require('fs-extra');
 const path = require('path');
 const chalk = require('chalk');
 
+const isValidTemplateFileRegex = /\.(json|yaml)$/i;
+
+const isValidTemplateFile = (filename) => {
+  return isValidTemplateFileRegex.test(filename);
+};
+
 const walkTemplates =(dir, list) => {
   let newlist = [...list];
 
@@ -9,7 +15,7 @@ const walkTemplates =(dir, list) => {
     const filename = path.join(dir, file);
     if (fs.statSync(filename).isDirectory()) {
       newlist = [...newlist, ...walkTemplates(filename, list)];
-    } else {
+    } else if (isValidTemplateFile(filename)) {
       newlist.push(filename);
     }
   });
